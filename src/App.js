@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import './assets/layout.css';
+import routes from './routes/routes'; 
+import LoginForm from './components/LoginForm';
+import Layout from './components/Layout/Layout';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import AuthGuard from './components/AuthGuard';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="*" element={<NotFound />} />
+        <Route
+          element={
+            <AuthGuard>
+              <Layout />
+            </AuthGuard>
+          }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Route>
+
+        <Route path="/" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
 }
 
