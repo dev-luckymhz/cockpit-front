@@ -16,12 +16,20 @@ export const getOrganisation = (orgId) => {
   return client.get("/organisation", { params });
 };
 
-export const getDevices = (orgId) => {
-  const params = {};
-  if (orgId) params.orgId = orgId;
+export const getDevices = async (orgId, options = {}) => {
+  const params = { orgId };
+  params.source = "api";
 
-  return client.get("/devices", { params });
+  if (options.search) params.search = options.search;
+  if (options.sortBy) params.sortBy = options.sortBy;
+  if (options.sortDir) params.sortDir = options.sortDir;
+  if (options.page) params.page = options.page;
+  if (options.pageSize) params.pageSize = options.pageSize;
+
+  return await client.get("/devices", { params });
 };
+
+
 
 // DEVICE LEVEL
 

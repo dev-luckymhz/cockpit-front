@@ -93,10 +93,10 @@ const routes = [
   { path: '/eset', element: <Eset /> },
   { path: '/eset/device/list', element: <EsetDevicesList /> },
   { path: '/eset/device/:id/details', element: <EsetDeviceDetails /> },
-  { path: '/inventory/list', element: <InventaireDetails /> },
+  { path: '/inventory/pc', element: <InventaireDetails /> },
   
   
-  { path: '/inventory/pc', element: <LicenseTables /> },
+  { path: '/inventory/list', element: <LicenseTables /> },
 
   
   { path: '/ninja', element: <Ninja /> },
